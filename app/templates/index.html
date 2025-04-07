@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Collector Application</title>
+
+  <link rel="stylesheet" href="/static/css/styles.css"/>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Feedback Collector Application</h1>
+
+    <label for="name">Enter Your Name:</label>
+    <input type="text" name="name" id="userName" />
+
+    <label for="email">Enter Your Email:</label>
+    <input type="email" name="email" id="userEmail" />
+
+    <label for="type">Select Type:</label>
+    <select name="type" id="feedbackType">
+      <option value="" disabled selected>Select Option</option>
+      <option value="bug-report">Bug Report</option>
+      <option value="feature-request">Feature Request</option>
+      <option value="general-comment">General Comment</option>
+    </select>
+
+    <label for="message">Enter Message:</label>
+    <textarea name="message" id="userMessage"></textarea>
+
+    <button type="submit" id="submit-btn" onclick="sendResponse()">Submit</button>
+
+    <p id="message" hidden></p>
+  </div>
+</body>
+</html>
