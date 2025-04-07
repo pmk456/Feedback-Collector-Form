@@ -10,9 +10,12 @@ import os
 class DBHandler:
     def __init__(self):
         MONGO_URI = os.getenv("MONGO_URI")
-        self.client = MongoClient(MONGO_URI)
-        self.db = self.client['FeedbackDB']
-        self.collection = self.db['feedback']
+        try:
+            self.client = MongoClient(MONGO_URI)
+            self.db = self.client['FeedbackDB']
+            self.collection = self.db['feedback']
+        except:
+            raise
         
     def insert_record(self, data):
         try:

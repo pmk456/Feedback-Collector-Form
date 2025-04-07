@@ -32,8 +32,14 @@ def api_feedback():
         message = "Feedback Successfully Sent!"
     
     # Updating to Database
-    handler = db_handler.DBHandler()
-    db_status = handler.insert_record(
+    try:
+        mongo_handler = db_handler.DBHandler()
+    except:
+        message = "Database Connection Error!"
+        code = 400
+        success = False
+        
+    db_status = mongo_handler.insert_record(
         {'Name': data['name'],
          'Email': data['email'],
          'Message': data['msg'],
@@ -41,7 +47,7 @@ def api_feedback():
         }
     )
     if not db_status:
-        message = "Database Error!"
+        message = "Database Insertion Error!"
         code = 400
         success = False
         
