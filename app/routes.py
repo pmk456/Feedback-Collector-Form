@@ -33,12 +33,16 @@ def api_feedback():
     
     # Updating to Database
     handler = db_handler.DBHandler()
-    handler.insert_record(
+    db_status = handler.insert_record(
         {'Name': data['name'],
          'Email': data['email'],
          'Message': data['msg'],
          'Time Stamp': datetime.datetime.now() 
         }
     )
-
+    if not db_status:
+        message = "Database Error!"
+        code = 400
+        success = False
+        
     return jsonify({'success': success, 'message': message}), code
