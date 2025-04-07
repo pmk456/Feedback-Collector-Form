@@ -22,7 +22,7 @@ class DBHandler:
             self.collection.insert_one(data)
             return True
         except:
-            return False
+            raise
         
 if __name__ == "__main__":
     handler = DBHandler()
