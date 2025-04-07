@@ -1,9 +1,9 @@
 from app import create_app
 import os
-MONGO_USER_NAME = os.getenv("MONGO_USER_NAME")
-MONGO_PASS = os.getenv("MONGO_PASS")
-if not MONGO_USER_NAME or MONGO_PASS:
-    print("Please Set Username and Password for MongoDB Atlas!")
+MONGO_URI = os.getenv("MONGO_URI")
+
+if not MONGO_URI:
+    print("Please Set Mongo URI for MongoDB Atlas using export\nEnsure URI is Parsed!")
     exit(1)
     
 app = create_app()
