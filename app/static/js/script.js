@@ -13,7 +13,8 @@ function sendResponse() {
 
     if (name && email && msg && type !== "") {
         respMsg.hidden = true;
-
+        const btn = document.getElementById("submit-btn");
+        btn.disabled = true;
         fetch("/api/feedback", {
             method: "POST",
             headers: {
@@ -32,6 +33,7 @@ function sendResponse() {
             respMsg.style.color = "red";
             respMsg.hidden = false;
         });
+        btn.disabled = false;
 
     } else {
         respMsg.hidden = false;
