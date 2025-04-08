@@ -71,6 +71,11 @@ button:hover {
     transform: scale(1.02);
 }
 
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
 #message {
     text-align: center;
     font-weight: bold;

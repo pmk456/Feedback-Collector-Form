@@ -3,17 +3,17 @@ Author Name: Patan Musthakheem
 Date & Time: 08-04-2025 12:02AM
 File: script.js
 */
-
 function sendResponse() {
+
     const name = document.getElementById("userName").value.trim();
     const email = document.getElementById("userEmail").value.trim();
     const type = document.getElementById("feedbackType").value;
     const msg = document.getElementById("userMessage").value.trim();
     const respMsg = document.getElementById("message");
+    const btn = document.getElementById("submit-btn");
 
     if (name && email && msg && type !== "") {
         respMsg.hidden = true;
-        const btn = document.getElementById("submit-btn");
         btn.disabled = true;
         fetch("/api/feedback", {
             method: "POST",
@@ -32,8 +32,10 @@ function sendResponse() {
             respMsg.innerText = "Something went wrong!";
             respMsg.style.color = "red";
             respMsg.hidden = false;
+        })
+        .finally(() => {
+            btn.disabled = false;
         });
-        btn.disabled = false;
 
     } else {
         respMsg.hidden = false;
