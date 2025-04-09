@@ -12,3 +12,6 @@ def validate_name(name):
 def validate_email(email):
     pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     return re.fullmatch(pattern, email.strip()) is not None
+
+def validate_type(type):
+    return type in ['bug-report', 'feature-request', 'general-comment']
