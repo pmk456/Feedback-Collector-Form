@@ -38,13 +38,15 @@ def api_feedback():
         message = "Database Connection Error!"
         code = 400
         success = False
-    db_status = mongo_handler.insert_record(
-            {'Name': data['name'],
-            'Email': data['email'],
-            'Message': data['msg'],
-            'Time Stamp': datetime.datetime.now()})
-    if not db_status:
-        message = "Database Insertion Error!"
-        code = 400
-        success = False
+    else:
+        db_status = mongo_handler.insert_record(
+                {'Name': data['name'],
+                'Email': data['email'],
+                'Type': data['type'],
+                'Message': data['msg'],
+                'Time Stamp': datetime.datetime.now()})
+        if not db_status:
+            message = "Database Insertion Error!"
+            code = 400
+            success = False
     return jsonify({'success': success, 'message': message}), code
