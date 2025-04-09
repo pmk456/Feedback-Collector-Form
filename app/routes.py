@@ -19,7 +19,7 @@ def index():
 
 @routes.route('/api/feedback', methods=["POST"])
 def api_feedback():
-    if not request.is_json():
+    if not request.is_json:
         return jsonify({
             'sucess': False, 'message': 
             'Content-Type must be application/json'
