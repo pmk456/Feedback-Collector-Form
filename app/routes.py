@@ -29,7 +29,7 @@ def api_feedback():
     success = False
     code = 400
     required_fields = ['name', 'email', 'msg', 'type']
-    if not data or all(k in data for k in required_fields):
+    if not data or not all(k in data for k in required_fields):
         return jsonify({
             'success': False,
             'message': "Required Fields Missing!",
