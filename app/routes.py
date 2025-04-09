@@ -19,9 +19,21 @@ def index():
 
 @routes.route('/api/feedback', methods=["POST"])
 def api_feedback():
+    if not request.is_json():
+        return jsonify({
+            'sucess': False, 'message': 
+            'Content-Type must be application/json'
+        }), 400
+
     data = request.get_json()
     success = False
     code = 400
+    required_fields = ['name', 'email', 'msg', 'type']
+    if not data or all(k in data for k in required_fields):
+        return jsonify({
+            'success': False,
+            'message': "Required Fields Missing!",
+        }), 400
     if not utils.validate_name(data['name']):
         message = "Please Enter Valid Name!"
     elif not utils.validate_email(data['email']):
@@ -39,14 +51,18 @@ def api_feedback():
         code = 400
         success = False
     else:
-        db_status = mongo_handler.insert_record(
-                {'Name': data['name'],
+        db_status = mongo_handler.insert_record({
+                'Name': data['name'],
                 'Email': data['email'],
                 'Type': data['type'],
                 'Message': data['msg'],
-                'Time Stamp': datetime.datetime.now()})
+                'Time Stamp': datetime.datetime.now()
+            })
         if not db_status:
             message = "Database Insertion Error!"
             code = 400
             success = False
-    return jsonify({'success': success, 'message': message}), code
+    return jsonify({
+        'success': success, 
+        'message': message
+        }), code
