@@ -26,10 +26,11 @@ def api_feedback():
         }), 400
 
     data = request.get_json()
+    print("DATA: ", data)
     success = False
     code = 400
     required_fields = ['name', 'email', 'msg', 'type']
-    if not data or not all(k in data for k in required_fields):
+    if not data or not all(k in data.keys() for k in required_fields):
         return jsonify({
             'success': False,
             'message': "Required Fields Missing!",
@@ -38,6 +39,8 @@ def api_feedback():
         message = "Please Enter Valid Name!"
     elif not utils.validate_email(data['email']):
         message = "Please Enter Valid Email!"  
+    elif not utils.validate_type(data['type']):
+        message = "Please Enter a Valid Type!"
     else:
         success = True
         code = 200
