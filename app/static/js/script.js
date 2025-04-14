@@ -15,6 +15,7 @@ function sendResponse() {
     if (name && email && msg && type !== "") {
         respMsg.hidden = true;
         btn.disabled = true;
+        btn.innerText = "Submitting..."
         fetch("/api/feedback", {
             method: "POST",
             headers: {
@@ -34,6 +35,7 @@ function sendResponse() {
             respMsg.hidden = false;
         })
         .finally(() => {
+            btn.innerText = "Submit";
             btn.disabled = false;
         });
 
