@@ -11,7 +11,6 @@ function sendResponse() {
     const msg = document.getElementById("userMessage").value.trim();
     const respMsg = document.getElementById("message");
     const btn = document.getElementById("submit-btn");
-
     if (name && email && msg && type !== "") {
         respMsg.hidden = true;
         btn.disabled = true;
